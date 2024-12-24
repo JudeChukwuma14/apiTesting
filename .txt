@@ -1,0 +1,178 @@
+const mongoose = require('mongoose');
+
+// Subschema: Personal Info
+const personalInfoSchema = new mongoose.Schema({
+  firstName: { type: String, required: true },
+  middleName: { type: String },
+  lastName: { type: String, required: true },
+  address: {
+    street: { type: String, required: true },
+    addressLine2: { type: String },
+    city: { type: String, required: true },
+    state: { type: String, required: true },
+    zipCode: { type: String, required: true },
+  },
+  email: { type: String, required: true },
+  phone: { type: String, required: true },
+  is18OrOlder: { type: Boolean, required: true },
+});
+
+// Subschema: Desired Employment
+const desiredEmploymentSchema = new mongoose.Schema({
+  position: {
+    type: String,
+    required: true,
+    enum: [
+      "Registered Nurse",
+      "Medication Technician",
+      "Certified Nursing Assistant (CNA)",
+      "Home Health Aide",
+      "Licensed Practical Nurse (LPN)",
+    ],
+  },
+  desiredSalary: { type: Number },
+  startDate: { type: Date, required: true },
+  isCurrentlyEmployed: { type: Boolean, required: true },
+  referralSource: {
+    type: String,
+    enum: [
+      "Friend",
+      "Employee",
+      "Advertisement",
+      "Government Placement Agency",
+      "Internet",
+      "Other",
+    ],
+  },
+  mayInquireCurrentEmployer: { type: Boolean },
+  hasWorkedForCompany: { type: Boolean },
+});
+
+// Subschema: Employment History
+const employmentHistorySchema = new mongoose.Schema({
+  employerName: { type: String },
+  jobTitle: { type: String },
+  address: {
+    street: { type: String },
+    addressLine2: { type: String },
+    city: { type: String },
+    state: { type: String },
+    zipCode: { type: String },
+  },
+  from: { type: Date },
+  to: { type: Date },
+  natureOfWork: { type: String },
+  hourlyRate: { type: Number },
+  phone: { type: String },
+  supervisorName: { type: String },
+  comments: { type: String },
+});
+
+// Subschema: Education
+const educationSchema = new mongoose.Schema({
+  highSchool: {
+    name: { type: String },
+    yearsAttended: { type: Number },
+    graduated: { type: Boolean },
+    major: { type: String },
+  },
+  college: {
+    name: { type: String },
+    yearsAttended: { type: Number },
+    graduated: { type: Boolean },
+    major: { type: String },
+  },
+  professionalTraining: {
+    name: { type: String },
+    yearsAttended: { type: Number },
+    graduated: { type: Boolean },
+    certification: { type: String },
+  },
+});
+
+// Subschema: Emergency Contact
+const emergencyContactSchema = new mongoose.Schema({
+  name: {
+    firstName: { type: String, required: true },
+    lastName: { type: String, required: true },
+  },
+  address: {
+    street: { type: String },
+    addressLine2: { type: String },
+    city: { type: String },
+    state: { type: String },
+    zipCode: { type: String },
+  },
+  email: { type: String },
+  relationship: { type: String },
+});
+
+// Subschema: References
+const referenceSchema = new mongoose.Schema({
+  name: {
+    firstName: { type: String, required: true },
+    lastName: { type: String, required: true },
+  },
+  address: {
+    street: { type: String },
+    addressLine2: { type: String },
+    city: { type: String },
+    state: { type: String },
+    zipCode: { type: String },
+  },
+  business:{type: String}
+  email: { type: String },
+  phone: { type: String },
+  from: { type: Date },
+  to: { type: Date },
+});
+
+// Subschema: Agreement
+const agreementSchema = new mongoose.Schema({
+  certifyTrueInfo: { type: Boolean, required: true },
+  signature: { type: String },
+  applicationDate: { type: Date, required: true },
+});
+
+// Subschema: Attachments
+const attachmentSchema = new mongoose.Schema({
+  type: [String],
+});
+
+// Main Schema: AllSchema
+const allSchema = new mongoose.Schema(
+  {
+    personalInfo: { type: mongoose.Schema.Types.ObjectId, ref: 'PersonalInfo' },
+    desiredEmployment: { type: mongoose.Schema.Types.ObjectId, ref: 'DesiredEmployment' },
+    employmentHistory: [{ type: mongoose.Schema.Types.ObjectId, ref: 'EmploymentHistory' }],
+    education: { type: mongoose.Schema.Types.ObjectId, ref: 'Education' },
+    emergencyContact: { type: mongoose.Schema.Types.ObjectId, ref: 'EmergencyContact' },
+    references: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Reference' }],
+    agreement: { type: mongoose.Schema.Types.ObjectId, ref: 'Agreement' },
+    attachments: { type: mongoose.Schema.Types.ObjectId, ref: 'Attachment' },
+  },
+  { timestamps: true }
+);
+
+// Create Models
+const PersonalInfo = mongoose.model('PersonalInfo', personalInfoSchema);
+const DesiredEmployment = mongoose.model('DesiredEmployment', desiredEmploymentSchema);
+const EmploymentHistory = mongoose.model('EmploymentHistory', employmentHistorySchema);
+const Education = mongoose.model('Education', educationSchema);
+const EmergencyContact = mongoose.model('EmergencyContact', emergencyContactSchema);
+const Reference = mongoose.model('Reference', referenceSchema);
+const Agreement = mongoose.model('Agreement', agreementSchema);
+const Attachment = mongoose.model('Attachment', attachmentSchema);
+const All = mongoose.model('All', allSchema);
+
+module.exports = {
+  PersonalInfo,
+  DesiredEmployment,
+  EmploymentHistory,
+  Education,
+  EmergencyContact,
+  Reference,
+  Agreement,
+  Attachment,
+  All,
+};
