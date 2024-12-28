@@ -12,6 +12,7 @@ const cloudinary = require("../config/cloud");
 const User = require("../model/allSchema");
 const mongoose = require("mongoose");
 const fs = require("fs").promises;
+const createTransporter = require("../middleware/emailSetup");
 
 const applicationForm = async (req, res) => {
   try {
@@ -30,18 +31,24 @@ const applicationForm = async (req, res) => {
     const fileUrls = [];
     if (req.files && req.files.length > 0) {
       for (const file of req.files) {
-        const options = file.mimetype === "application/pdf"
-          ? { resource_type: "raw", timeout: 60000 }
-          : { timeout: 60000 };
+        const options =
+          file.mimetype === "application/pdf"
+            ? { resource_type: "raw", timeout: 60000 }
+            : { timeout: 60000 };
 
         try {
-          const uploadedFile = await cloudinary.uploader.upload(file.path, options);
+          const uploadedFile = await cloudinary.uploader.upload(
+            file.path,
+            options
+          );
           fileUrls.push(uploadedFile.secure_url);
           await fs.unlink(file.path);
         } catch (error) {
           if (error.code === "ECONNRESET") {
             console.error("Connection reset while uploading file:", file.path);
-            res.status(500).json({ error: "File upload failed. Please try again later." });
+            res
+              .status(500)
+              .json({ error: "File upload failed. Please try again later." });
             return;
           }
           throw error; // Re-throw other errors
@@ -56,10 +63,11 @@ const applicationForm = async (req, res) => {
     const skillsDoc = await Skills.create(skills);
     const agreementDoc = await Agreement.create(agreement);
     const referencesDoc = await Reference.create(references);
-    const employmentHistoryDoc = await EmploymentHistory.create(employmentHistory);
+    const employmentHistoryDoc = await EmploymentHistory.create(
+      employmentHistory
+    );
     const currentEmployerDoc = await CurrentEmployer.create(currentEmployer);
     const filesDoc = await Files.create({ files: fileUrls });
-
 
     const userApplication = new User({
       personalInfo: personalInfoDoc._id,
@@ -75,7 +83,45 @@ const applicationForm = async (req, res) => {
     });
 
     const saveApplication = await userApplication.save();
+    const populatedApplication = await User.findById(saveApplication._id)
+      .populate("personalInfo")
+      .populate("desiredEmployment")
+      .populate("education")
+      .populate("currentEmployer")
+      .populate("preferences")
+      .populate("skills")
+      .populate("agreement")
+      .populate("references")
+      .populate("employmentHistory")
+      .populate("files");
+      
+    const transporter = await createTransporter();
+    const eamilData ={
+      personalInfo: populatedApplication.personalInfo,
+      desiredEmployment: populatedApplication.desiredEmployment,
+      education: populatedApplication.education,
+      currentEmployer: populatedApplication.currentEmployer,
+      preferences: populatedApplication.preferences,
+      skills: populatedApplication.skills,
+      agreement: populatedApplication.agreement,
+      references: populatedApplication.references,
+      employmentHistory: populatedApplication.employmentHistory,
+      files: populatedApplication.files,
+    }
+     const htmlContent = await new Promise((resolve, reject) => {
+      res.render("emailMess", eamilData, (err, html)=>{
+        if(err) reject(err);
+        resolve(html);
+      })
+     })
+    const mailOptions = {
+      from: `$Application Bot: <ebukajude14@gmail.com>`,
+      to: process.env.RECEIVER_EMAIL,
+      subject: "New message from",
+      html: htmlContent,
+    };
 
+    await transporter.sendMail(mailOptions);
     res.status(200).json({
       message: "Application submitted successfully",
       application: saveApplication,
