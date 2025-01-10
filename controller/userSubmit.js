@@ -7,6 +7,7 @@ const Agreement = require("../model/agreement");
 const Reference = require("../model/reference");
 const Desire = require("../model/desiredEmployment");
 const CurrentEmployer = require("../model/currentEmployment");
+const EmergencyContact = require("../model/emergencyContact");
 const Files = require("../model/Attechment");
 const cloudinary = require("../config/cloud");
 const User = require("../model/allSchema");
@@ -25,6 +26,7 @@ const applicationForm = async (req, res) => {
       agreement,
       references,
       employmentHistory,
+      emergencyContact,
       currentEmployer,
     } = req.body;
 
@@ -66,8 +68,10 @@ const applicationForm = async (req, res) => {
     const employmentHistoryDoc = await EmploymentHistory.create(
       employmentHistory
     );
+    const emergencyContactDoc = await EmergencyContact.create(emergencyContact);
     const currentEmployerDoc = await CurrentEmployer.create(currentEmployer);
     const filesDoc = await Files.create({ files: fileUrls });
+    console.log("Step 3 - Files Document:", filesDoc);
 
     const userApplication = new User({
       personalInfo: personalInfoDoc._id,
@@ -79,6 +83,7 @@ const applicationForm = async (req, res) => {
       agreement: agreementDoc._id,
       references: referencesDoc._id,
       employmentHistory: employmentHistoryDoc._id,
+      emergencycontact: emergencyContactDoc._id,
       files: filesDoc._id,
     });
 
@@ -93,10 +98,11 @@ const applicationForm = async (req, res) => {
       .populate("agreement")
       .populate("references")
       .populate("employmentHistory")
+      .populate("emergencycontact")
       .populate("files");
-      
+
     const transporter = await createTransporter();
-    const eamilData ={
+    const eamilData = {
       personalInfo: populatedApplication.personalInfo,
       desiredEmployment: populatedApplication.desiredEmployment,
       education: populatedApplication.education,
@@ -106,14 +112,16 @@ const applicationForm = async (req, res) => {
       agreement: populatedApplication.agreement,
       references: populatedApplication.references,
       employmentHistory: populatedApplication.employmentHistory,
+      emergencycontact: populatedApplication.emergencycontact,
       files: populatedApplication.files,
-    }
-     const htmlContent = await new Promise((resolve, reject) => {
-      res.render("emailMess", eamilData, (err, html)=>{
-        if(err) reject(err);
+    };
+    const htmlContent = await new Promise((resolve, reject) => {
+      res.render("emailMess", eamilData, (err, html) => {
+        if (err) reject(err);
         resolve(html);
-      })
-     })
+      });
+    });
+    console.log("Step 4 - Populated User:", populatedApplication);
     const mailOptions = {
       from: `$Application Bot: <ebukajude14@gmail.com>`,
       to: process.env.RECEIVER_EMAIL,

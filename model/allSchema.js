@@ -16,7 +16,8 @@ const userSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Agreement",
     },
-
+    emergencycontact:{type: mongoose.Schema.Types.ObjectId,ref:"EmergencyContact"},
+    certify:{type: mongoose.Schema.Types.ObjectId, ref:"Certify"},
     files: [{ type: mongoose.Schema.Types.ObjectId, ref: "Files" }],
   },
   { timestamps: true }

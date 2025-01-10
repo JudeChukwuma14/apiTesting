@@ -1,10 +1,11 @@
 const mongoose = require("mongoose");
 const preferencesSchema = new mongoose.Schema({
-  licensedDriver: { type: Boolean },
-  willingToTravel30Mins: { type: Boolean },
-  hospitalShifts: { type: Boolean },
-  nursingHomeShifts: { type: Boolean },
-  privateDutyCases: { type: Boolean },
+  licensedDriver: { type: String, enum:["Yes", "No"] },
+  willingToTravel30Mins: { type: String, enum:["Yes", "No"] },
+  hospitalShifts: { type: String, enum:["Yes", "No"] },
+  nursingHomeShifts: { type: String, enum:["Yes", "No"] },
+  privateDutyCases: { type: String, enum:["Yes", "No"] },
+  timeOfavailability: { type: Date },
   availability: {
     daysOfWeek: [
       {

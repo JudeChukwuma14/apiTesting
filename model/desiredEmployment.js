@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const desiredEmploymentSchema = new mongoose.Schema({
     position: {
       type: String,
-    
       enum: [
         "Registered Nurse",
         "Medication Technician",
@@ -14,7 +13,7 @@ const desiredEmploymentSchema = new mongoose.Schema({
     },
     desiredSalary: { type: Number },
     startDate: { type: Date },
-    isCurrentlyEmployed: { type: Boolean },
+    isCurrentlyEmployed: { type: String, enum:["Yes", "No"] },
     referalSource: {
       type: String,
       enum: [
@@ -26,8 +25,8 @@ const desiredEmploymentSchema = new mongoose.Schema({
         "Other",
       ],
     },
-    mayInquireCurrentEmployer: { type: Boolean },
-    hasWorkedForCompany: { type: Boolean },
+    mayInquireCurrentEmployer: { type: String, enum:["Yes", "No"] },
+    hasWorkedForCompany: { type: String, enum:["Yes", "No"] },
   });
 
   module.exports = mongoose.model("DesiredEmployment",desiredEmploymentSchema)

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            padding: 20px;
+        }
+
+        .email-container {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            border-top: 6px solid #15803D;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            padding-bottom: 20px;
+        }
+
+        .header img {
+            max-width: 80px;
+        }
+     
+        .details p {
+            margin: 5px 0;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #888888;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="email-container">
+        <div class="header">
+            <img src="https://citylocal101.com/storage/company/9784/logo/88791908da5778117519c799a95e620b.jpg" alt="Company Logo" />
+            <h3>New Message Notification</h3>
+        </div>
+
+        <div class="content">
+            <div class="details">
+                <p><strong>Full Name:</strong>
+                    <%= firstName %>
+                </p>
+                <p><strong>Subject:</strong>
+                    <%= subject %>
+                </p>
+                <p><strong>Email:</strong>
+                    <%= email %>
+                </p>
+                <p><strong>Address:</strong>
+                    <%= address %>
+                </p>
+                <p><strong>Message:</strong></p>
+                <p>
+                    <%= message %>
+                </p>
+            </div>
+        </div>
+
+        <div class="footer">
+            &copy; 2024 Your Company. All rights reserved.
+        </div>
+    </div>
+</body>
+
+</html>

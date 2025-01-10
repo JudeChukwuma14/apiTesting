@@ -5,14 +5,14 @@ const personalInfoSchema = new mongoose.Schema({
   lastName: { type: String },
   address: {
     street: { type: String },
-    addressLine2: { type: String },
+    line: { type: String },
     city: { type: String },
     state: { type: String },
     zipCode: { type: String },
   },
   email: { type: String },
   phone: { type: String },
-  is18OrOlder: { type: Boolean },
+  is18OrOlder: { type: String, enum:["Yes", "No"] },
 });
 
 module.exports = mongoose.model("PersonalInfo", personalInfoSchema);

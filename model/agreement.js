@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const agreementSchema = new mongoose.Schema({
   certifyTrueInfo: { type: Boolean },
-  signature: { type: String },
+  accept: { type: String },
   applicationDate: { type: Date },
 });
 

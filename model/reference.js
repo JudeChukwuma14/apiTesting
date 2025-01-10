@@ -12,6 +12,7 @@ const referenceSchema = new mongoose.Schema({
     state: { type: String },
     zipCode: { type: String },
   },
+  jobTitle:{type: String},
   business:{type: String},
   email: { type: String },
   phone: { type: String },
