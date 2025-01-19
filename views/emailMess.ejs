@@ -12,6 +12,7 @@
             padding: 0;
             background-color: #f5f5f5;
         }
+
         .header {
             text-align: center;
             padding-bottom: 20px;
@@ -20,7 +21,7 @@
         .header img {
             max-width: 80px;
         }
-     
+
 
         .container {
             width: 90%;
@@ -41,7 +42,8 @@
         h2 {
             color: #333;
         }
-        h3{
+
+        h3 {
             color: #333;
             font-size: 1.5rem;
         }
@@ -52,9 +54,9 @@
         }
 
         /* Flex containers for alignment */
-   
 
-       
+
+
         .footer {
             text-align: center;
             font-size: 12px;
@@ -96,223 +98,434 @@
 <body>
     <div class="container">
         <div class="header">
-            <img src="https://citylocal101.com/storage/company/9784/logo/88791908da5778117519c799a95e620b.jpg" alt="Company Logo" />
+            <img src="https://citylocal101.com/storage/company/9784/logo/88791908da5778117519c799a95e620b.jpg"
+                alt="Company Logo" />
             <h3>New Message Notification</h3>
         </div>
         <div>
             <h1>PERSONAL INFORMATION</h1>
             <div class="flex-container">
-                <p> <strong>First Name: </strong><%= personalInfo.firstName || "Not provided" %></p>
-                <p> <strong>Middle Name: </strong><%= personalInfo.middleName || "Not provided" %></p>
-                <p> <strong>Last Name: </strong><%= personalInfo.lastName || "Not provided" %></p>
+                <p> <strong>First Name: </strong>
+                    <%= personalInfo.firstName || "Not provided" %>
+                </p>
+                <p> <strong>Middle Name: </strong>
+                    <%= personalInfo.middleName || "Not provided" %>
+                </p>
+                <p> <strong>Last Name: </strong>
+                    <%= personalInfo.lastName || "Not provided" %>
+                </p>
             </div>
             <div class="flex-container">
-                <p> <strong>Street address:</strong> <%= personalInfo?.address?.street || "Not provided" %></p>
-                <p> <strong>Address Line2:</strong> <%= personalInfo?.address?.street || "Not provided" %></p>
-                <p> <strong> City: </strong><%= personalInfo?.address?.street || "Not provided" %></p>
-                <p> <strong>State: </strong> <%= personalInfo?.address?.street || "Not provided" %></p>
-                <p> <strong>Zip code: </strong><%= personalInfo?.address?.street || "Not provided" %></p>
+                <p> <strong>Street address:</strong>
+                    <%= personalInfo?.address?.street || "Not provided" %>
+                </p>
+                <p> <strong>Address Line2:</strong>
+                    <%= personalInfo?.address?.street || "Not provided" %>
+                </p>
+                <p> <strong> City: </strong>
+                    <%= personalInfo?.address?.street || "Not provided" %>
+                </p>
+                <p> <strong>State: </strong>
+                    <%= personalInfo?.address?.street || "Not provided" %>
+                </p>
+                <p> <strong>Zip code: </strong>
+                    <%= personalInfo?.address?.street || "Not provided" %>
+                </p>
             </div>
             <div class="flex-container">
-                <p> <strong>Email: </strong><%= personalInfo.email || "Not provided" %></p>
-                <p> <strong>Phone: </strong><%= personalInfo.phone || "Not provided" %></p>
-                <p> <strong>Age: </strong><%= personalInfo.is18OrOlder || "Not provided" %></p>
+                <p> <strong>Email: </strong>
+                    <%= personalInfo.email || "Not provided" %>
+                </p>
+                <p> <strong>Phone: </strong>
+                    <%= personalInfo.phone || "Not provided" %>
+                </p>
+                <p> <strong>Age: </strong>
+                    <%= personalInfo.is18OrOlder || "Not provided" %>
+                </p>
             </div>
         </div>
         <div>
             <h1>DESIRED EMPLOYMENT</h1>
             <div class="flex-container">
-                <p> <strong>Position you are applying for: </strong><%= desiredEmployment.position || "Not provided" %></p>
-                <p> <strong>Desired Salary: </strong><%= desiredEmployment.desiredSalary || "Not provided" %></p>
-                <p> <strong>Start Date: </strong><%= desiredEmployment.startDate || "Not provided" %></p>
+                <p> <strong>Position you are applying for: </strong>
+                    <%= desiredEmployment.position || "Not provided" %>
+                </p>
+                <p> <strong>Desired Salary: </strong>
+                    <%= desiredEmployment.desiredSalary || "Not provided" %>
+                </p>
+                <p> <strong>Start Date: </strong>
+                    <%= desiredEmployment.startDate.toDateString()|| "Not provided" %>
+                </p>
             </div>
             <div class="flex-container">
-                <p> <strong>Are you currently employed?: </strong><%= desiredEmployment.isCurrentlyEmployed || "Not provided" %></p>
-                <p> <strong>May we inquire of your current employer: </strong><%= desiredEmployment.mayInquireCurrentEmployer || "Not provided" %></p>
-                <p> <strong>Have you ever worked for this company: </strong><%= desiredEmployment.hasWorkedForCompany || "Not provided" %></p>
-                <p> <strong>Who referred you to Munas Heart Nursing: </strong><%= desiredEmployment.referalSource || "Not provided" %></p>
+                <p> <strong>Are you currently employed?: </strong>
+                    <%= desiredEmployment.isCurrentlyEmployed || "Not provided" %>
+                </p>
+                <p> <strong>May we inquire of your current employer: </strong>
+                    <%= desiredEmployment.mayInquireCurrentEmployer || "Not provided" %>
+                </p>
+                <p> <strong>Have you ever worked for this company: </strong>
+                    <%= desiredEmployment.hasWorkedForCompany || "Not provided" %>
+                </p>
+                <p> <strong>Who referred you to Munas Heart Nursing: </strong>
+                    <%= desiredEmployment.referalSource || "Not provided" %>
+                </p>
             </div>
         </div>
         <div>
             <h1>CURRENT EMPLOYER</h1>
             <div class="flex-container">
-                <p> <strong>Current Employer: </strong><%= currentEmployer.employerName || "Not provided" %></p>
-                <p> <strong>Telephone: </strong><%= currentEmployer.telephone || "Not provided" %></p>
-                <p> <strong>Reason for leaving: </strong><%= currentEmployer.reasonForLeaving || "Not provided" %></p>
-                <p> <strong>Name of last supervisor: </strong><%= currentEmployer.nameOfLastSupervisor || "Not provided" %></p>
+                <p> <strong>Current Employer: </strong>
+                    <%= currentEmployer.employerName || "Not provided" %>
+                </p>
+                <p> <strong>Telephone: </strong>
+                    <%= currentEmployer.telephone || "Not provided" %>
+                </p>
+                <p> <strong>Reason for leaving: </strong>
+                    <%= currentEmployer.reasonForLeaving || "Not provided" %>
+                </p>
+                <p> <strong>Name of last supervisor: </strong>
+                    <%= currentEmployer.nameOfLastSupervisor || "Not provided" %>
+                </p>
             </div>
         </div>
         <div>
             <h1>EMPLOYMENT HISTORY</h1>
-            <% employmentHistory.forEach((employmentHistory, index) => { %>
-              <div>
-                <h2>Employment Record <%= index + 1 %></h2>
-                <div class="flex-container">
-                  <p><strong>Name of Employer:</strong> <%= employmentHistory.employerName %></p>
-                  <p><strong>Job Title:</strong> <%= employmentHistory.jobTitle %></p>
+            <% employmentHistory.forEach((employmentHistory, index)=> { %>
+                <div>
+                    <h2>Employment Record <%= index + 1 %>
+                    </h2>
+                    <div class="flex-container">
+                        <p><strong>Name of Employer:</strong>
+                            <%= employmentHistory.employerName %>
+                        </p>
+                        <p><strong>Job Title:</strong>
+                            <%= employmentHistory.jobTitle %>
+                        </p>
+                    </div>
+                    <div class="flex-container">
+                        <p><strong>Street Address:</strong>
+                            <%= employmentHistory.address.street %>
+                        </p>
+                        <p><strong>Address Line 2:</strong>
+                            <%= employmentHistory.address.line %>
+                        </p>
+                        <p><strong>City:</strong>
+                            <%= employmentHistory.address.city %>
+                        </p>
+                        <p><strong>State:</strong>
+                            <%= employmentHistory.address.state %>
+                        </p>
+                        <p><strong>Zip Code:</strong>
+                            <%= employmentHistory.address.zipCode %>
+                        </p>
+                    </div>
+                    <div class="flex-container">
+                        <p><strong>From:</strong>
+                            <%= employmentHistory.from.toDateString() %>
+                        </p>
+                        <p><strong>To:</strong>
+                            <%= employmentHistory.to.toDateString() %>
+                        </p>
+                        <p><strong>Nature of Work:</strong>
+                            <%= employmentHistory.natureOfWork %>
+                        </p>
+                    </div>
+                    <div class="flex-container">
+                        <p><strong>Hourly Rate:</strong>
+                            <%= employmentHistory.hourlyRate %>
+                        </p>
+                        <p><strong>Name of Supervisor:</strong>
+                            <%= employmentHistory.supervisorName %>
+                        </p>
+                        <p><strong>Phone:</strong>
+                            <%= employmentHistory.phone %>
+                        </p>
+                        <p><strong>Comment:</strong>
+                            <%= employmentHistory.comments %>
+                        </p>
+                    </div>
                 </div>
-                <div class="flex-container">
-                  <p><strong>Street Address:</strong> <%= employmentHistory.address.street %></p>
-                  <p><strong>Address Line 2:</strong> <%= employmentHistory.address.line %></p>
-                  <p><strong>City:</strong> <%= employmentHistory.address.city %></p>
-                  <p><strong>State:</strong> <%= employmentHistory.address.state %></p>
-                  <p><strong>Zip Code:</strong> <%= employmentHistory.address.zipCode %></p>
-                </div>
-                <div class="flex-container">
-                  <p><strong>From:</strong> <%= employmentHistory.from.toDateString() %></p>
-                  <p><strong>To:</strong> <%= employmentHistory.to.toDateString() %></p>
-                  <p><strong>Nature of Work:</strong> <%= employmentHistory.natureOfWork %></p>
-                </div>
-                <div class="flex-container">
-                  <p><strong>Hourly Rate:</strong> <%= employmentHistory.hourlyRate %></p>
-                  <p><strong>Name of Supervisor:</strong> <%= employmentHistory.supervisorName %></p>
-                  <p><strong>Phone:</strong> <%= employmentHistory.phone %></p>
-                  <p><strong>Comment:</strong> <%= employmentHistory.comments %></p>
-                </div>
-              </div>
-            <% }); %>
-          </div>
-          
+                <% }); %>
+        </div>
+
         <div>
             <h1>EDUCATION</h1>
             <div>
                 <h3>High School</h3>
                 <div class="flex-container">
-                    <p> <strong>Name of School & Location: </strong><%= education?.highSchool?.name || "Not provided" %></p>
-                    <p> <strong>Number of years attended: </strong><%= education?.highSchool?.yearsAttended || "Not provided" %></p>
-                    <p> <strong>Did you graduate: </strong><%= education?.highSchool?.graduated || "Not provided" %></p>
-                    <p> <strong>Major: </strong><%= education?.highSchool?.major || "Not provided" %></p>
+                    <p> <strong>Name of School & Location: </strong>
+                        <%= education?.highSchool?.name || "Not provided" %>
+                    </p>
+                    <p> <strong>Number of years attended: </strong>
+                        <%= education?.highSchool?.yearsAttended || "Not provided" %>
+                    </p>
+                    <p> <strong>Did you graduate: </strong>
+                        <%= education?.highSchool?.graduated || "Not provided" %>
+                    </p>
+                    <p> <strong>Major: </strong>
+                        <%= education?.highSchool?.major || "Not provided" %>
+                    </p>
                 </div>
             </div>
             <div>
                 <h3>College | University</h3>
                 <div class="flex-container">
-                    <p> <strong>Name of School & Location: </strong><%= education?.college?.name || "Not provided" %></p>
-                    <p> <strong>Number of years attended: </strong><%= education?.college?.yearsAttended || "Not provided" %></p>
-                    <p> <strong>Did you graduate: </strong><%= education?.college?.graduated || "Not provided" %></p>
-                    <p> <strong>Major: </strong><%= education?.college?.major || "Not provided" %></p>
+                    <p> <strong>Name of School & Location: </strong>
+                        <%= education?.college?.name || "Not provided" %>
+                    </p>
+                    <p> <strong>Number of years attended: </strong>
+                        <%= education?.college?.yearsAttended || "Not provided" %>
+                    </p>
+                    <p> <strong>Did you graduate: </strong>
+                        <%= education?.college?.graduated || "Not provided" %>
+                    </p>
+                    <p> <strong>Major: </strong>
+                        <%= education?.college?.major || "Not provided" %>
+                    </p>
                 </div>
             </div>
             <div>
                 <h3>Professional Training</h3>
                 <div class="flex-container">
-                    <p> <strong>Name of School & Location: </strong><%= education?.professionalTraining?.name || "Not provided" %></p>
-                    <p> <strong>Number of years attended: </strong><%= education?.professionalTraining?.yearsAttended || "Not provided" %></p>
-                    <p> <strong>Did you graduate: </strong><%= education?.professionalTraining?.graduated || "Not provided" %></p>
-                    <p> <strong>Professional Certification: </strong><%= education?.professionalTraining?.certification || "Not provided" %></p>
+                    <p> <strong>Name of School & Location: </strong>
+                        <%= education?.professionalTraining?.name || "Not provided" %>
+                    </p>
+                    <p> <strong>Number of years attended: </strong>
+                        <%= education?.professionalTraining?.yearsAttended || "Not provided" %>
+                    </p>
+                    <p> <strong>Did you graduate: </strong>
+                        <%= education?.professionalTraining?.graduated || "Not provided" %>
+                    </p>
+                    <p> <strong>Professional Certification: </strong>
+                        <%= education?.professionalTraining?.certification || "Not provided" %>
+                    </p>
                 </div>
             </div>
         </div>
         <div>
             <h1>EMERGENCY CONTACT</h1>
             <div class="flex-container">
-                <p> <strong>First Name: </strong><%= emergencycontact?.firstName || "Not provided" %></p>
-                <p> <strong>Last Name: </strong><%= emergencycontact?.lastName || "Not provided" %></p>
+                <p> <strong>First Name: </strong>
+                    <%= emergencycontact?.firstName || "Not provided" %>
+                </p>
+                <p> <strong>Last Name: </strong>
+                    <%= emergencycontact?.lastName || "Not provided" %>
+                </p>
             </div>
             <div class="flex-container">
-                <p> <strong>Street address: </strong><%= emergencycontact?.address?.street || "Not provided" %></p>
-                <p> <strong>Address Line2: </strong><%= emergencycontact?.address?.line || "Not provided" %></p>
-                <p> <strong>City: </strong><%= emergencycontact?.address?.city || "Not provided" %></p>
-                <p> <strong>State: </strong><%= emergencycontact?.address?.State || "Not provided" %></p>
-                <p> <strong>Zip code: </strong><%= emergencycontact?.address?.zipCode || "Not provided" %></p>
+                <p> <strong>Street address: </strong>
+                    <%= emergencycontact?.address?.street || "Not provided" %>
+                </p>
+                <p> <strong>Address Line2: </strong>
+                    <%= emergencycontact?.address?.line || "Not provided" %>
+                </p>
+                <p> <strong>City: </strong>
+                    <%= emergencycontact?.address?.city || "Not provided" %>
+                </p>
+                <p> <strong>State: </strong>
+                    <%= emergencycontact?.address?.State || "Not provided" %>
+                </p>
+                <p> <strong>Zip code: </strong>
+                    <%= emergencycontact?.address?.zipCode || "Not provided" %>
+                </p>
             </div>
             <div class="flex-container">
-                <p> <strong>Email: </strong><%= emergencycontact?.email || "Not provided" %></p>
-                <p> <strong>Relationship: </strong><%= emergencycontact?.relationship || "Not provided" %></p>
+                <p> <strong>Email: </strong>
+                    <%= emergencycontact?.email || "Not provided" %>
+                </p>
+                <p> <strong>Relationship: </strong>
+                    <%= emergencycontact?.relationship || "Not provided" %>
+                </p>
             </div>
         </div>
         <div>
             <h1>PERSONAL REFERENCES</h1>
-            <% references.forEach((reference, index) => { %>
-              <div>
-                <h2>Professional Reference <%= index + 1 %></h2>
-                <div class="flex-container">
-                  <p><strong>Name:</strong> <%= reference.name.firstName %> <%= reference.name.lastName %></p>
-                  <p><strong>Job Title:</strong> <%= reference.jobTitle %></p>
+            <% references.forEach((reference, index)=> { %>
+                <div>
+                    <h2>Professional Reference <%= index + 1 %>
+                    </h2>
+                    <div class="flex-container">
+                        <p><strong>Name:</strong>
+                            <%= reference.name.firstName %>
+                                <%= reference.name.lastName %>
+                        </p>
+                        <p><strong>Job Title:</strong>
+                            <%= reference.jobTitle %>
+                        </p>
+                    </div>
+                    <div class="flex-container">
+                        <p><strong>Street Address:</strong>
+                            <%= reference.address.street %>
+                        </p>
+                        <p><strong>Address Line:</strong>
+                            <%= reference.address.line %>
+                        </p>
+                        <p><strong>City:</strong>
+                            <%= reference.address.city %>
+                        </p>
+                        <p><strong>State:</strong>
+                            <%= reference.address.state %>
+                        </p>
+                        <p><strong>Zip Code:</strong>
+                            <%= reference.address.zipCode %>
+                        </p>
+                    </div>
+                    <div class="flex-container">
+                        <p><strong>Email:</strong>
+                            <%= reference.email %>
+                        </p>
+                        <p><strong>Phone:</strong>
+                            <%= reference.phone %>
+                        </p>
+                    </div>
+                    <div class="flex-container">
+                        <p><strong>Business:</strong>
+                            <%= reference.business %>
+                        </p>
+                        <p><strong>From:</strong>
+                            <%= reference.from.toDateString() %>
+                        </p>
+                        <p><strong>To:</strong>
+                            <%= reference.to.toDateString() %>
+                        </p>
+                    </div>
                 </div>
-                <div class="flex-container">
-                  <p><strong>Street Address:</strong> <%= reference.address.street %></p>
-                  <p><strong>Address Line:</strong> <%= reference.address.line %></p>
-                  <p><strong>City:</strong> <%= reference.address.city %></p>
-                  <p><strong>State:</strong> <%= reference.address.state %></p>
-                  <p><strong>Zip Code:</strong> <%= reference.address.zipCode %></p>
-                </div>
-                <div class="flex-container">
-                  <p><strong>Email:</strong> <%= reference.email %></p>
-                  <p><strong>Phone:</strong> <%= reference.phone %></p>
-                </div>
-                <div class="flex-container">
-                  <p><strong>Business:</strong> <%= reference.business %></p>
-                  <p><strong>From:</strong> <%= reference.from.toDateString() %></p>
-                  <p><strong>To:</strong> <%= reference.to.toDateString() %></p>
-                </div>
-              </div>
-            <% }); %>
-          </div>
-          
+                <% }); %>
+        </div>
+        <div>
+            <h1>CERTIFICATION</h1>
+            <div class="flex-container">
+                <p> <strong>Have you been convicted of a crime in the last 5 years?: </strong>
+                    <%= certify.convictedFiveYears || "Not provided" %>
+                </p>
+                <p> <strong>Are you a certified: </strong>
+                    <%= certify.iCertify || "Not provided" %>
+                </p>
+                <p> <strong>State: </strong>
+                    <%= certify.state || "Not provided" %>
+                </p>
+                <p> <strong>Check all that apply: </strong>
+                    <%= certify.checkApply || "Not provided" %>
+                </p>
+                <p> <strong>Check all that apply Other: </strong>
+                    <%= certify.other || "Not provided" %>
+                </p>
+            </div>
 
-        <div>
-            <h1>SKILLS</h1>
-            <div class="flex-container">
-                <p> <strong>Can you do vital signs: </strong><%= skills.vitalSigns || "Not provided" %></p>
-                <p> <strong>Can you do nurses notes: </strong><%= skills.nursesNotes || "Not provided" %></p>
-                <p> <strong>Can you do catheter care: </strong><%= skills.catheterCare || "Not provided" %></p>
+            <div>
+                <h1>SKILLS</h1>
+                <div class="flex-container">
+                    <p> <strong>Can you do vital signs: </strong>
+                        <%= skills.vitalSigns || "Not provided" %>
+                    </p>
+                    <p> <strong>Can you do nurses notes: </strong>
+                        <%= skills.nursesNotes || "Not provided" %>
+                    </p>
+                    <p> <strong>Can you do catheter care: </strong>
+                        <%= skills.catheterCare || "Not provided" %>
+                    </p>
+                </div>
+                <div class="flex-container">
+                    <p> <strong>Can you do insert catheters: </strong>
+                        <%= skills.insertCatheters || "Not provided" %>
+                    </p>
+                    <p> <strong>Can you do start IVs: </strong>
+                        <%= skills.startIVs || "Not provided" %>
+                    </p>
+                    <p> <strong> Do you suction patients: </strong>
+                        <%= skills.suctionPatients || "Not provided" %>
+                    </p>
+                </div>
+                <div class="flex-container">
+                    <p> <strong>Can you set up oxygen for patients: </strong>
+                        <%= skills.oxygenSetup || "Not provided" %>
+                    </p>
+                    <p> <strong>Can you do neurological Assessments: </strong>
+                        <%= skills.neurologicalAssessment || "Not provided" %>
+                    </p>
+                    <p> <strong>can you give intramuscular medications: </strong>
+                        <%= skills.intramuscularMeds || "Not provided" %>
+                    </p>
+                </div>
+                <div class="flex-container">
+                    <p> <strong>Can you give IV medications: </strong>
+                        <%= skills.ivMeds || "Not provided" %>
+                    </p>
+                    <p> <strong>Can you assess patients for admission: </strong>
+                        <%= skills.patientAssessment || "Not provided" %>
+                    </p>
+                    <p> <strong>Can you discharge patients: </strong>
+                        <%= skills.patientDischarge || "Not provided" %>
+                    </p>
+                </div>
+                <div class="flex-container">
+                    <p> <strong>Have you had CPR: </strong>
+                        <%= skills.cpr || "Not provided" %>
+                    </p>
+                    <p> <strong>Do you have intensive care experience: </strong>
+                        <%= skills.icuExperience || "Not provided" %>
+                    </p>
+                    <p> <strong>In which of the following areas have you had experience: </strong>
+                        <%= skills.medSurgExperience || "Not provided" %>
+                    </p>
+                    <p> <strong>Have you had any special training in nursing: </strong>
+                        <%= skills.specialTraining || "Not provided" %>
+                    </p>
+                </div>
             </div>
-            <div class="flex-container">
-                <p> <strong>Can you do insert catheters: </strong><%= skills.insertCatheters || "Not provided" %></p>
-                <p> <strong>Can you do start IVs: </strong><%= skills.startIVs || "Not provided" %></p>
-                <p> <strong> Do you suction patients: </strong><%= skills.suctionPatients || "Not provided" %></p>
+            <div>
+                <h1>SKILLS</h1>
+                <div class="flex-container">
+                    <p> <strong>Are you a licensed driver: </strong>
+                        <%= preferences.licensedDriver || "Not provided" %>
+                    </p>
+                    <p> <strong>Will you travel 30 minutes one way: </strong>
+                        <%= preferences.willingToTravel30Mins || "Not provided" %>
+                    </p>
+                    <p> <strong>Are you a licensed driver: </strong>
+                        <%= preferences.licensedDriver || "Not provided" %>
+                    </p>
+                </div>
+                <div class="flex-container">
+                    <p> <strong>Will you work shifts at a hospital: </strong>
+                        <%= preferences.hospitalShifts || "Not provided" %>
+                    </p>
+                    <p> <strong>Will you work shifts at a nursing home: </strong>
+                        <%= preferences.nursingHomeShifts || "Not provided" %>
+                    </p>
+                    <p> <strong> Will you work private duty cases: </strong>
+                        <%= preferences.privateDutyCases || "Not provided" %>
+                    </p>
+                </div>
+                <div class="flex-container">
+                    <p> <strong>Please rate your physical condition: </strong>
+                        <%= preferences.privateDutyCases || "Not provided" %>
+                    </p>
+                    <p> <strong>Select the time of day you are available: </strong>
+                        <%= preferences.timeOfavailability.toDateString() || "Not provided" %>
+                    </p>
+                    <p> <strong>Select your days of availability: </strong>
+                        <%= preferences.availability.daysOfWeek || "Not provided" %>
+                    </p>
+                </div>
+                <div class="flex-container">
+                    <p> <strong>How many hours a week do you wish to work: </strong>
+                        <%= preferences.hoursPerWeek || "Not provided" %>
+                    </p>
+                    <p><strong>Do you have any handicaps? If so, please describe: </strong>
+                        <%= preferences.handicaps || "Not provided" %>
+                    </p>
+                </div>
             </div>
-            <div class="flex-container">
-                <p> <strong>Can you set up oxygen for patients: </strong><%= skills.oxygenSetup || "Not provided" %></p>
-                <p> <strong>Can you do neurological Assessments: </strong><%= skills.neurologicalAssessment || "Not provided" %></p>
-                <p> <strong>can you give intramuscular medications: </strong><%= skills.intramuscularMeds || "Not provided" %></p>
+            <div>
+                <p>Signature</p>
+                <p>Date</p>
             </div>
-            <div class="flex-container">
-                <p> <strong>Can you give IV medications: </strong><%= skills.ivMeds || "Not provided" %></p>
-                <p> <strong>Can you assess patients for admission: </strong><%= skills.patientAssessment || "Not provided" %></p>
-                <p> <strong>Can you discharge patients: </strong><%= skills.patientDischarge || "Not provided" %></p>
-            </div>
-            <div class="flex-container">
-                <p> <strong>Have you had CPR: </strong><%= skills.cpr || "Not provided" %></p>
-                <p> <strong>Do you have intensive care experience: </strong><%= skills.icuExperience || "Not provided" %></p>
-                <p> <strong>In which of the following areas have you had experience: </strong><%= skills.medSurgExperience || "Not provided" %></p>
-                <p> <strong>Have you had any special training in nursing: </strong><%= skills.specialTraining || "Not provided" %></p>
+            <div class="footer">
+                &copy; 2024 Your Company. All rights reserved.
             </div>
         </div>
-        <div>
-            <h1>SKILLS</h1>
-            <div class="flex-container">
-                <p> <strong>Are you a licensed driver: </strong><%= preferences.licensedDriver || "Not provided" %></p>
-                <p> <strong>Will you travel 30 minutes one way: </strong><%= preferences.willingToTravel30Mins || "Not provided" %></p>
-                <p> <strong>Are you a licensed driver: </strong><%= preferences.licensedDriver || "Not provided" %></p>
-            </div>
-            <div class="flex-container">
-                <p> <strong>Will you work shifts at a hospital: </strong><%= preferences.hospitalShifts || "Not provided" %></p>
-                <p> <strong>Will you work shifts at a nursing home: </strong><%= preferences.nursingHomeShifts || "Not provided" %></p>
-                <p> <strong> Will you work private duty cases: </strong><%= preferences.privateDutyCases || "Not provided" %></p>
-            </div>
-            <div class="flex-container">
-                <p> <strong>Please rate your physical condition: </strong><%= preferences.privateDutyCases || "Not provided" %></p>
-                <p> <strong>Select the time of day you are available: </strong><%= preferences.timeOfavailability || "Not provided" %></p>
-                <p> <strong>Select your days of availability: </strong><%= preferences.availability.daysOfWeek || "Not provided" %></p>
-            </div>
-            <div class="flex-container">
-                <p> <strong>How many hours a week do you wish to work: </strong><%= preferences.hoursPerWeek || "Not provided" %></p>
-                <p><strong>Do you have any handicaps? If so, please describe: </strong><%= preferences.handicaps || "Not provided" %></p>
-            </div>
-        </div>
-        <div>
-            <p>Signature</p>
-            <p>Date</p>
-        </div>
-        <div>
-            file
-        </div>
-        <div class="footer">
-            &copy; 2024 Your Company. All rights reserved.
-        </div>
-    </div>
 </body>
 
 </html>

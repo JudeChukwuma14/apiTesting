@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const attachmentsSchema = new mongoose.Schema({
-  files: { type: [String] },
+  images: { type: [String] },
 });
 
-module.exports = mongoose.model("Files", attachmentsSchema);
+module.exports = mongoose.model("Images", attachmentsSchema);

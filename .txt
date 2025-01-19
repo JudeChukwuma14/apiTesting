@@ -176,3 +176,28 @@ module.exports = {
   Attachment,
   All,
 };
+
+
+
+const fileUrls = [];
+    if (req.files && Object.keys(req.files).length > 0) {
+      console.log(req.files);
+      // If there are multiple files uploaded
+      for (const key in req.files) {
+        const file = req.files[key];
+        const options =
+          file.mimetype === "application/pdf"
+            ? { resource_type: "raw", timeout: 60000 }
+            : { timeout: 60000 };
+
+        try {
+          const uploadedFile = await cloudinary.uploader.upload(file.tempFilePath, options);
+          console.log("Uploaded to Cloudinary:", uploadedFile.secure_url);
+          fileUrls.push(uploadedFile.secure_url);
+          console.log(fileUrls);
+        } catch (error) {
+          console.error("Error uploading file:", error);
+          return res.status(500).json({ error: "File upload failed. Please try again later." });
+        }
+      }
+    }
