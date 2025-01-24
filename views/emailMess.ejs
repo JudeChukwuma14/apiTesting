@@ -528,7 +528,7 @@
                       <h2>File <%= index + 1 %></h2>
                       <% if (data.filetype === "image") { %>
                         <!-- Render image if the filetype is "image" -->
-                        <img src="<%= data.item %>" alt="Image <%= index + 1 %>" style="width: 100%; max-width: 300px;">
+                        <img src="<%= data.item %>" alt="Image <%= index + 1 %>" style="width: 50px; height: 50px;">
                       <% } else if (data.filetype === "pdf") { %>
                         <!-- Render PDF link if the filetype is "pdf" -->
                         <a href="<%= data.item %>" target="_blank">
