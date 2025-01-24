@@ -18,7 +18,14 @@ const userSchema = new mongoose.Schema(
     },
     emergencycontact:{type: mongoose.Schema.Types.ObjectId,ref:"EmergencyContact"},
     certify:{type: mongoose.Schema.Types.ObjectId, ref:"Certify"},
-    images: [{ type: mongoose.Schema.Types.ObjectId, ref: "Images" }],
+    images: [{
+      filetype:{
+        type: String
+      },
+      item:{
+        type: String
+      }
+    }],
   },
   { timestamps: true }
 );

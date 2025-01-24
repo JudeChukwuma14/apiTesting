@@ -39,15 +39,31 @@ const applicationForm = async (req, res) => {
     await Promise.all(
       images.map(async (item) => {
         const imageID = uuidv4();
-        const imageExtension = item.name.split(".").pop();
+        const imageExtension = item.name.split(".").pop().toLowerCase();
         const newImageName = `${imageID}.${imageExtension}`;
+        const allowedExtensions = ["jpg", "jpeg", "png", "webp", "pdf"];
+    
+        // Validate file extensions
+        if (!allowedExtensions.includes(imageExtension)) {
+          return res.status(400).json({
+            message: "File extension not allowed",
+            success: false,
+          });
+        }
+    
         const imagePath = `${hostname}/public/uploads/${newImageName}`;
-        imageArray.push(imagePath);
+        let fileFormat = {
+          filetype: imageExtension === "pdf" ? "pdf" : "image",
+          item: imagePath,
+        };
+    
+        imageArray.push(fileFormat);
+    
         const imageDr = `public/uploads/${newImageName}`;
-        await item.mv(imageDr);
+        await item.mv(imageDr); // Save the file to the server
       })
     );
-
+    
     const parsedBody = qs.parse(req.body);
 
     const {
@@ -61,22 +77,22 @@ const applicationForm = async (req, res) => {
       employmentHistory,
       emergencyContact,
       currentEmployer,
-      certify
+      certify,
     } = parsedBody;
 
-    console.log("Parsed Data:", {
-      personalInfo,
-      desiredEmployment,
-      education,
-      preferences,
-      skills,
-      agreement,
-      references,
-      employmentHistory,
-      emergencyContact,
-      currentEmployer,
-      certify
-    });
+    // console.log("Parsed Data:", {
+    //   personalInfo,
+    //   desiredEmployment,
+    //   education,
+    //   preferences,
+    //   skills,
+    //   agreement,
+    //   references,
+    //   employmentHistory,
+    //   emergencyContact,
+    //   currentEmployer,
+    //   certify
+    // });
 
     const personalInfoDoc = await PersonalInfo.create(personalInfo);
     const desiredEmploymentDoc = await Desire.create(desiredEmployment);
@@ -91,21 +107,21 @@ const applicationForm = async (req, res) => {
     const emergencyContactDoc = await EmergencyContact.create(emergencyContact);
     const certifyDoc = await Certify.create(certify);
     const currentEmployerDoc = await CurrentEmployer.create(currentEmployer);
-    const imagesDoc = await Images.create({ images: imageArray });
+    // const imagesDoc = await Images.create({ images: imageArray });
 
-    console.log("Created Documents:", {
-      personalInfoDoc,
-      desiredEmploymentDoc,
-      educationDoc,
-      preferencesDoc,
-      skillsDoc,
-      agreementDoc,
-      referencesDoc,
-      employmentHistoryDoc,
-      emergencyContactDoc,
-      currentEmployerDoc,
-      imagesDoc,
-    });
+    // console.log("Created Documents:", {
+    //   personalInfoDoc,
+    //   desiredEmploymentDoc,
+    //   educationDoc,
+    //   preferencesDoc,
+    //   skillsDoc,
+    //   agreementDoc,
+    //   referencesDoc,
+    //   employmentHistoryDoc,
+    //   emergencyContactDoc,
+    //   currentEmployerDoc,
+    //   imagesDoc,
+    // });
 
     const userApplication = new User({
       personalInfo: personalInfoDoc._id,
@@ -119,7 +135,7 @@ const applicationForm = async (req, res) => {
       employmentHistory: employmentHistoryDoc._id,
       emergencycontact: emergencyContactDoc._id,
       certify: certifyDoc._id,
-      images: imagesDoc._id,
+      images: imageArray,
     });
 
     const saveApplication = await userApplication.save();
@@ -134,8 +150,8 @@ const applicationForm = async (req, res) => {
       .populate("references")
       .populate("employmentHistory")
       .populate("certify")
-      .populate("emergencycontact")
-      .populate("images");
+      .populate("emergencycontact");
+    // .populate("images");
 
     // console.log("Populated Application:", populatedApplication);
 
@@ -152,9 +168,9 @@ const applicationForm = async (req, res) => {
       emergencycontact: populatedApplication.emergencycontact,
       certify: populatedApplication.certify,
       images: populatedApplication.images,
-      employmentHistory: populatedApplication.employmentHistory, // Add this line
+      employmentHistory: populatedApplication.employmentHistory, 
     };
-    // console.log(eamilData.personalInfo);
+
 
     const htmlContent = await new Promise((resolve, reject) => {
       res.render("emailMess", eamilData, (err, html) => {
