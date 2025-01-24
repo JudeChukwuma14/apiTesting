@@ -19,7 +19,7 @@ const qs = require("qs");
 
 const applicationForm = async (req, res) => {
   try {
-    // console.log("Request Body:", req.body);
+  
 
     if (!req.files) {
       return res.status(400).json({
@@ -80,20 +80,6 @@ const applicationForm = async (req, res) => {
       certify,
     } = parsedBody;
 
-    // console.log("Parsed Data:", {
-    //   personalInfo,
-    //   desiredEmployment,
-    //   education,
-    //   preferences,
-    //   skills,
-    //   agreement,
-    //   references,
-    //   employmentHistory,
-    //   emergencyContact,
-    //   currentEmployer,
-    //   certify
-    // });
-
     const personalInfoDoc = await PersonalInfo.create(personalInfo);
     const desiredEmploymentDoc = await Desire.create(desiredEmployment);
     const educationDoc = await Education.create(education);
@@ -107,21 +93,6 @@ const applicationForm = async (req, res) => {
     const emergencyContactDoc = await EmergencyContact.create(emergencyContact);
     const certifyDoc = await Certify.create(certify);
     const currentEmployerDoc = await CurrentEmployer.create(currentEmployer);
-    // const imagesDoc = await Images.create({ images: imageArray });
-
-    // console.log("Created Documents:", {
-    //   personalInfoDoc,
-    //   desiredEmploymentDoc,
-    //   educationDoc,
-    //   preferencesDoc,
-    //   skillsDoc,
-    //   agreementDoc,
-    //   referencesDoc,
-    //   employmentHistoryDoc,
-    //   emergencyContactDoc,
-    //   currentEmployerDoc,
-    //   imagesDoc,
-    // });
 
     const userApplication = new User({
       personalInfo: personalInfoDoc._id,
@@ -151,9 +122,7 @@ const applicationForm = async (req, res) => {
       .populate("employmentHistory")
       .populate("certify")
       .populate("emergencycontact");
-    // .populate("images");
-
-    // console.log("Populated Application:", populatedApplication);
+    
 
     const transporter = await createTransporter();
     const eamilData = {
